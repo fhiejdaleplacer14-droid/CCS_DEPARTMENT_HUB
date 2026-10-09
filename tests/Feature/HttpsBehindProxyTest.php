@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Vite;
 use Tests\TestCase;
 
 /**
@@ -32,6 +33,14 @@ class HttpsBehindProxyTest extends TestCase
 
     public function test_asset_urls_on_the_spa_shell_are_https(): void
     {
+        if (! is_file(public_path('build/manifest.json'))) {
+            $this->markTestSkipped('Needs built assets: run npm run build first.');
+        }
+
+        // While `npm run dev` is running Laravel links to the Vite dev server
+        // instead of the built assets, which is not what production serves.
+        Vite::useHotFile(storage_path('framework/testing/vite.hot'));
+
         $response = $this->withHeaders(self::PROXY_HEADERS)->get('/');
 
         $response->assertOk();

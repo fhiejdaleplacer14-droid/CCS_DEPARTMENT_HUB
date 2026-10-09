@@ -139,3 +139,16 @@ export const IconShield = (p) => (
         <path d="M9.5 12l1.8 1.8L15 10" />
     </Svg>
 );
+
+export const IconCheck = (p) => (
+    <Svg {...p}>
+        <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </Svg>
+);
+
+export const IconArrowRight = (p) => (
+    <Svg {...p}>
+        <path d="M5 12h14" />
+        <path d="M13 6l6 6-6 6" />
+    </Svg>
+);
