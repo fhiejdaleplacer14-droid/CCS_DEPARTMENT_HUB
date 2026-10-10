@@ -46,7 +46,7 @@ export default function Announcements({ standalone = false }) {
 
             {loading ? (
                 <SkeletonNotices />
-            ) : result?.data.length === 0 ? (
+            ) : !result ? null : result.data.length === 0 ? (
                 <Card>
                     <EmptyState
                         icon={<IconMegaphone className="h-8 w-8" />}

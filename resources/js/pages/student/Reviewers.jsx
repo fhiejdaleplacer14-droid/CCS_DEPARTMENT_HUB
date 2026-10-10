@@ -153,7 +153,7 @@ export default function Reviewers() {
 
             {loading ? (
                 <SkeletonCardGrid count={6} />
-            ) : result?.data.length === 0 ? (
+            ) : !result ? null : result.data.length === 0 ? (
                 <Card>
                     <EmptyState
                         icon={<IconBook className="h-8 w-8" />}

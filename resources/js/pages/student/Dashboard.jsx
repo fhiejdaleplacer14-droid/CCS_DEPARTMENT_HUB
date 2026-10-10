@@ -19,19 +19,30 @@ export default function Dashboard() {
 
     const firstName = user?.name?.split(' ')[0];
 
+    const header = (
+        <PageHeader
+            title={firstName ? `Welcome back, ${firstName}` : 'Welcome back'}
+            description="Your reviewers, concerns and department notices at a glance."
+            action={
+                <Button to="/reviewers/upload" size="sm">
+                    Upload Reviewer
+                </Button>
+            }
+        />
+    );
+
+    if (!data && !loading) {
+        return (
+            <>
+                {header}
+                <Alert tone="error">{error ?? 'We could not load your dashboard.'}</Alert>
+            </>
+        );
+    }
+
     return (
         <>
-            <PageHeader
-                title={firstName ? `Welcome back, ${firstName}` : 'Welcome back'}
-                description="Your reviewers, concerns and department notices at a glance."
-                action={
-                    <Button to="/reviewers/upload" size="sm">
-                        Upload Reviewer
-                    </Button>
-                }
-            />
-
-            {error && !data && <Alert tone="error">{error}</Alert>}
+            {header}
 
             {loading ? (
                 <SkeletonStats />

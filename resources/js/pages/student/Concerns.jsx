@@ -58,7 +58,7 @@ export default function Concerns() {
 
             {loading ? (
                 <SkeletonList count={3} />
-            ) : result?.data.length === 0 ? (
+            ) : !result ? null : result.data.length === 0 ? (
                 <Card>
                     <EmptyState
                         icon={<IconChat className="h-8 w-8" />}

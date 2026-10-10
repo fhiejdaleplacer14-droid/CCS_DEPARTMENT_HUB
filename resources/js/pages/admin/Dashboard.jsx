@@ -17,19 +17,30 @@ export default function AdminDashboard() {
         fallbackMessage: 'We could not load the dashboard.',
     });
 
+    const header = (
+        <PageHeader
+            title="Department Overview"
+            description="Reviewer screening, student concerns and announcements."
+            action={
+                <Button to="/admin/announcements" size="sm">
+                    New Announcement
+                </Button>
+            }
+        />
+    );
+
+    if (!data && !loading) {
+        return (
+            <>
+                {header}
+                <Alert tone="error">{error ?? 'We could not load the dashboard.'}</Alert>
+            </>
+        );
+    }
+
     return (
         <>
-            <PageHeader
-                title="Department Overview"
-                description="Reviewer screening, student concerns and announcements."
-                action={
-                    <Button to="/admin/announcements" size="sm">
-                        New Announcement
-                    </Button>
-                }
-            />
-
-            {error && !data && <Alert tone="error">{error}</Alert>}
+            {header}
 
             {loading ? (
                 <SkeletonStats />
